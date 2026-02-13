@@ -120,13 +120,13 @@ expr9 ::= expr9 'INC'
 
 assign_op ::= '+=' | '-=' | '*=' | '/='
 
-assign_expr ::= lvalue assign_op expr
+assign_expr ::= lval assign_op expr
 
 incdec_op ::= '++' | '--'
 
 incdec_expr ::=
-      incdec_op lvalue
-    | lvalue incdec_op
+      incdec_op lval
+    | lval incdec_op
 
 expr_plus ::= incdec_expr
             | assign_expr
