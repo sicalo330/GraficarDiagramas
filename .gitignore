@@ -1,0 +1,44 @@
+# Byte-compiled / optimizado / archivos DLL
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Extensiones C
+*.so
+
+# Paquetes de distribución
+dist/
+build/
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+.env
+
+# Archivos de pruebas y cobertura
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Configuración de IDEs
+.vscode/
+.idea/
+.spyderproject
+.ropeproject
+
+# Archivos de configuración locales
+*.log
+local_settings.py
+db.sqlite3
