@@ -27,7 +27,7 @@ stmt ::= open_stmt
 
 closed_stmt ::= if_stmt_closed
     | for_stmt_closed
-    | while_stmt_close
+    | while_stmt_closed
     | simple_stmt
 
 open_stmt ::= if_stmt_open
@@ -49,7 +49,7 @@ for_stmt_closed ::= for_header closed_stmt
 
 while_stmt_open ::= 'WHILE' '(' expr ')' open_stmt
 
-while_stmt_closed ::=  closed_stmt
+while_stmt_closed ::= 'WHILE' '(' expr ')' closed_stmt
 
 /* Simple statements are not recursive */
 simple_stmt ::= print_stmt

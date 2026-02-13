@@ -1,1 +1,2 @@
-expr ::= NUMBER ( '+' NUMBER )*
+stmt ::= 'print' expr
+       | expr
