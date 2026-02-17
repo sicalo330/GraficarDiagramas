@@ -1,5 +1,3 @@
-import os
-
 from railroad import (
     Choice,
     Diagram,
@@ -8,9 +6,6 @@ from railroad import (
     Terminal,
     ZeroOrMore,
 )
-
-os.makedirs("out/svg", exist_ok=True)
-# Recuerden poner .\.venv\Scripts\Activate para activar el entorno jeje
 
 
 def T(x):
@@ -26,17 +21,9 @@ def lvalue():
     return Diagram(Choice(0, T("ID"), Sequence(T("ID"), N("index"))))
 
 
-with open("out/svg/lvalue.svg", "w", encoding="utf-8") as f:
-    lvalue().writeStandalone(f.write)
-
-
 # stmt Bien
 def stmt():
     return Diagram(Choice(0, N("open_stmt"), N("closed_stmt")))
-
-
-with open("out/svg/stmt.svg", "w", encoding="utf-8") as f:
-    stmt().writeStandalone(f.write)
 
 
 # openStmt Bien
@@ -44,10 +31,6 @@ def openStmt():
     return Diagram(
         Choice(0, N("if_stmt_open"), N("for_stmt_open"), N("while_stmt_open"))
     )
-
-
-with open("out/svg/openStmt.svg", "w", encoding="utf-8") as f:
-    openStmt().writeStandalone(f.write)
 
 
 # closedStmt Bien
@@ -63,17 +46,9 @@ def closedStmt():
     )
 
 
-with open("out/svg/closedStmt.svg", "w", encoding="utf-8") as f:
-    closedStmt().writeStandalone(f.write)
-
-
 # if Bien
 def if_cond():
     return Diagram(Sequence(T("IF"), T("("), N("opt_expr"), T(")")))
-
-
-with open("out/svg/if_cond.svg", "w", encoding="utf-8") as f:
-    if_cond().writeStandalone(f.write)
 
 
 def ifStmtClosed():
@@ -89,10 +64,6 @@ def ifStmtClosed():
     )
 
 
-with open("out/svg/ifStmtClosed.svg", "w", encoding="utf-8") as f:
-    ifStmtClosed().writeStandalone(f.write)
-
-
 def ifStmtOpen():
     return Diagram(
         Choice(
@@ -101,10 +72,6 @@ def ifStmtOpen():
             Sequence(N("if_cond"), N("closed_stmt"), T("ELSE"), N("if_stmt_open")),
         )
     )
-
-
-with open("out/svg/ifStmtOpen.svg", "w", encoding="utf-8") as f:
-    ifStmtOpen().writeStandalone(f.write)
 
 
 # for Bien
@@ -123,24 +90,12 @@ def forHeader():
     )
 
 
-with open("out/svg/forHeader.svg", "w", encoding="utf-8") as f:
-    forHeader().writeStandalone(f.write)
-
-
 def forStmtOpen():
     return Diagram(Sequence(N("for_header"), N("open_stmt")))
 
 
-with open("out/svg/forStmtOpen.svg", "w", encoding="utf-8") as f:
-    forStmtOpen().writeStandalone(f.write)
-
-
 def forStmtClosed():
     return Diagram(Sequence(N("for_header"), N("closed_stmt")))
-
-
-with open("out/svg/forStmtClosed.svg", "w", encoding="utf-8") as f:
-    forStmtClosed().writeStandalone(f.write)
 
 
 # while Bien
@@ -148,16 +103,8 @@ def whileStmtOpen():
     return Diagram(Sequence(T("WHILE"), T("("), N("expr"), T(")"), N("open_stmt")))
 
 
-with open("out/svg/whileStmtOpen.svg", "w", encoding="utf-8") as f:
-    whileStmtOpen().writeStandalone(f.write)
-
-
 def whileStmtClosed():
     return Diagram(Sequence(T("WHILE"), T("("), N("expr"), T(")"), N("closed_stmt")))
-
-
-with open("out/svg/whileStmtClosed.svg", "w", encoding="utf-8") as f:
-    whileStmtClosed().writeStandalone(f.write)
 
 
 # simpleStmt Bien
@@ -174,49 +121,25 @@ def simpleStmt():
     )
 
 
-with open("out/svg/simpleStmt.svg", "w", encoding="utf-8") as f:
-    simpleStmt().writeStandalone(f.write)
-
-
 # Expr
 def expr():
     return Diagram(N("expr1"))
-
-
-with open("out/svg/expr.svg", "w", encoding="utf-8") as f:
-    expr().writeStandalone(f.write)
 
 
 def expr1():
     return Diagram(Choice(0, Sequence(N("lval"), T("="), N("expr1")), N("expr2")))
 
 
-with open("out/svg/expr1.svg", "w", encoding="utf-8") as f:
-    expr1().writeStandalone(f.write)
-
-
 def lval():
     return Diagram(Choice(0, T("ID"), Sequence(T("ID"), N("index"))))
-
-
-with open("out/svg/lval.svg", "w", encoding="utf-8") as f:
-    lval().writeStandalone(f.write)
 
 
 def expr2():
     return Diagram(Sequence(N("expr3"), ZeroOrMore(Sequence(T("LOR"), N("expr3")))))
 
 
-with open("out/svg/expr2.svg", "w", encoding="utf-8") as f:
-    expr2().writeStandalone(f.write)
-
-
 def expr3():
     return Diagram(Sequence(N("expr4"), ZeroOrMore(Sequence(T("LAND"), N("expr4")))))
-
-
-with open("out/svg/expr3.svg", "w", encoding="utf-8") as f:
-    expr3().writeStandalone(f.write)
 
 
 def expr4():
@@ -233,20 +156,12 @@ def expr4():
     )
 
 
-with open("out/svg/expr4.svg", "w", encoding="utf-8") as f:
-    expr4().writeStandalone(f.write)
-
-
 def expr5():
     return Diagram(
         Sequence(
             N("expr6"), ZeroOrMore(Sequence(Choice(0, T("+"), T("-")), N("expr6")))
         )
     )
-
-
-with open("out/svg/expr5.svg", "w", encoding="utf-8") as f:
-    expr5().writeStandalone(f.write)
 
 
 def expr6():
@@ -258,24 +173,12 @@ def expr6():
     )
 
 
-with open("out/svg/expr6.svg", "w", encoding="utf-8") as f:
-    expr6().writeStandalone(f.write)
-
-
 def expr7():
     return Diagram(Sequence(N("expr8"), ZeroOrMore(Sequence(T("^"), N("expr8")))))
 
 
-with open("out/svg/expr7.svg", "w", encoding="utf-8") as f:
-    expr7().writeStandalone(f.write)
-
-
 def expr8():
     return Diagram(Sequence(ZeroOrMore(Choice(0, T("-"), T("NOT"))), N("expr9")))
-
-
-with open("out/svg/expr8.svg", "w", encoding="utf-8") as f:
-    expr8().writeStandalone(f.write)
 
 
 def group():
@@ -290,40 +193,20 @@ def group():
     )
 
 
-with open("out/svg/group.svg", "w", encoding="utf-8") as f:
-    group().writeStandalone(f.write)
-
-
 def expr9():
     return Diagram(Sequence(N("group"), ZeroOrMore(Choice(0, T("INC"), T("DEC")))))
-
-
-with open("out/svg/expr9.svg", "w", encoding="utf-8") as f:
-    expr9().writeStandalone(f.write)
 
 
 def assignOp():
     return Diagram(Choice(0, T("+="), T("-="), T("*="), T("/=")))
 
 
-with open("out/svg/assignOp.svg", "w", encoding="utf-8") as f:
-    assignOp().writeStandalone(f.write)
-
-
 def assignExpr():
     return Diagram(Sequence(N("lval"), N("assignOp"), N("expr")))
 
 
-with open("out/svg/assignExpr.svg", "w", encoding="utf-8") as f:
-    assignExpr().writeStandalone(f.write)
-
-
 def incdecOp():
     return Diagram(Choice(0, T("++"), T("--")))
-
-
-with open("out/svg/incdecOp.svg", "w", encoding="utf-8") as f:
-    incdecOp().writeStandalone(f.write)
 
 
 def incdecExpr():
@@ -338,5 +221,55 @@ def incdecExpr():
     )
 
 
-with open("out/svg/incdecExpr.svg", "w", encoding="utf-8") as f:
-    incdecExpr().writeStandalone(f.write)
+# Clases
+def typeClass():
+    return Diagram(Sequence(T("CLASS"), T("("), N("parent_class"), T(")")))
+
+
+with open("out/svg/typeClass.svg", "w", encoding="utf-8") as f:
+    typeClass().writeStandalone(f.write)
+
+
+# type_array
+def typeArray():
+    return Diagram(
+        Choice(
+            0,
+            Sequence(T("ARRAY"), T("["), T("]"), N("type_simple")),
+            Sequence(T("ARRAY"), T("["), T("]"), N("type_array")),
+            Sequence(T("ARRAY"), T("["), T("]"), N("type_class")),
+        )
+    )
+
+
+def typeArraySized():
+    return Diagram(
+        Choice(
+            0,
+            Sequence(T("ARRAY"), N("index"), N("type_simple")),
+            Sequence(T("ARRAY"), N("index"), N("type_array_sized")),
+            Sequence(T("ARRAY"), N("index"), N("type_class")),
+        )
+    )
+
+
+# type_func
+def typeFunc():
+    return Diagram(
+        Choice(
+            0,
+            Sequence(
+                T("FUNCTION"), N("type_simple"), T("("), N("opt_param_list"), T(")")
+            ),
+            Sequence(
+                T("FUNCTION"),
+                N("type_array_sized"),
+                T("("),
+                N("opt_param_list"),
+                T(")"),
+            ),
+            Sequence(
+                T("FUNCTION"), N("type_class"), T("("), N("opt_param_list"), T(")")
+            ),
+        )
+    )
